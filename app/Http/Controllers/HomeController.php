@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Gate;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -24,5 +24,15 @@ class HomeController extends Controller
     public function index()
     {
         return view('home');
+    }
+
+
+
+    public function private()
+    {
+       if (Gate::allows('admin-only', auth()->user())) {
+            return view('private');
+        }
+        return 'You are not admin!!!!';
     }
 }

@@ -12,6 +12,10 @@
                     @endcan
                 </div>
 
+                @can('admin-only', auth()->user())
+                    <a href="{{ url('/private') }}">Private</a>
+                @endcan
+
                 <div class="panel-body">
                     <div class="row">
                     @foreach($posts as $post)

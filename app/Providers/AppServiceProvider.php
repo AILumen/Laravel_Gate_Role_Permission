@@ -15,6 +15,14 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPostPolicies();
+
+        Gate::define('admin-only', function ($user) {
+            if($user->is_admin == 1)
+            {
+                return true;
+            }
+            return false;
+        });
     }
 
     /**
@@ -36,7 +44,7 @@ class AppServiceProvider extends ServiceProvider
         });
         Gate::define('update-post', function ($user, Post $post) {
             // dd($post);
-            return $user->hasAccess(['update-post']) or $user->id == $post->user_id;
+                return $user->hasAccess(['update-post']) or $user->id == $post->user_id;
         });
         Gate::define('publish-post', function ($user) {
             return $user->hasAccess(['publish-post']);
@@ -44,6 +52,9 @@ class AppServiceProvider extends ServiceProvider
         Gate::define('see-all-drafts', function ($user) {
             return $user->inRole('editor');
         });
+
+
+
     }
 
 

@@ -52,3 +52,8 @@ Route::group(['prefix' => 'posts'], function () {
         ->name('publish_post')
         ->middleware('can:publish-post');
 });
+
+
+
+
+Route::get('/private', 'HomeController@private')->name('private');
