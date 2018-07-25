@@ -43,8 +43,11 @@ class AppServiceProvider extends ServiceProvider
             return $user->hasAccess(['create-post']);
         });
         Gate::define('update-post', function ($user, Post $post) {
+            // dd($user);
             // dd($post);
-                return $user->hasAccess(['update-post']) or $user->id == $post->user_id;
+            // dd($user->hasAccess(['update-post']));
+            // dd($user->id == $post->user_id);
+            return $user->hasAccess(['update-post']) or $user->id == $post->user_id;
         });
         Gate::define('publish-post', function ($user) {
             return $user->hasAccess(['publish-post']);
